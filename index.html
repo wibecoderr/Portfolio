@@ -412,6 +412,28 @@
     color:var(--accent);
     font-weight:600;
   }
+  .contact-heading{
+    font-size: 2.8rem;
+    line-height: 1.2;
+}
+
+.contact-heading span{
+    display:block;
+    margin-top:8px;
+    font-size:0.9rem;
+    font-style:italic;
+    font-weight:400;
+    color:var(--accent);
+    opacity:.55;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:opacity .4s ease, transform .4s ease;
+}
+
+.contact-heading span.fade{
+    opacity:0;
+    transform:translateY(8px);
+}
   .rotate-word{
     display:inline-block;
     opacity:0;
@@ -532,7 +554,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="wordmark">Deekshant Pareek<span style="color:var(--accent)"> -></span> MCA -> Software Engineer</div>
+    <div class="wordmark">Deekshant Pareek -></span> <span>MCA -> Software Engineer</span></div>
 
     <ul class="navlinks">
       <li><a href="#about">About</a></li>
@@ -555,7 +577,7 @@
         backed by 300+ DSA problems solved and published research.</p>
       <div class="hero-cta enter enter-4">
         <a class="btn btn-primary" href="#projects">View projects</a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="#contact"><span>Get in touch</span></a>
       </div>
     </div>
     <svg class="node-graphic enter-graphic" id="nodeGraphic" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -645,7 +667,6 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Projects</h2>
-      <span class="section-tag">SELECTED WORK</span>
     </div>
 
     <div class="project-card reveal">
@@ -685,7 +706,6 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Skills</h2>
-      <span class="section-tag">TOOLBOX</span>
     </div>
     <div class="skills-grid reveal">
       <div class="skill-group">
@@ -720,10 +740,9 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Achievements</h2>
-      <span class="section-tag">RECOGNITION</span>
     </div>
-    <ul class="ach-list reveal">
-      <li><strong>Research paper accepted</strong> at the 6th International Conference on Computational Methods in Science and Technology.</li>
+    <ul class="ach-list reveal" style= "text-align: left;">
+      <li><strong>Research paper accepted</strong> At International Conference on Computational Methods in Science and Technology.</li>
       <li><strong>Smart India Hackathon 2024</strong> — National Semi-Finalist.</li>
       <li><strong>300+ DSA problems</strong> solved across LeetCode and competitive programming platforms.</li>
       <li><strong>Merit Scholarship</strong> recipient during BCA; District-level Volleyball Representative and School Team Captain.</li>
@@ -735,7 +754,6 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Education</h2>
-      <span class="section-tag">BACKGROUND</span>
     </div>
 
     <div class="edu-item reveal">
@@ -768,12 +786,11 @@
     </div>
   </div>
 </section>
+<footer id="contact">
 
-<section id="contact" class="contact-section">
   <div class="wrap">
     <div class="section-head reveal">
-      <h2>Contact</h2>
-      <span class="section-tag">GET IN TOUCH</span>
+      <h2><span id="contactText">Get in Touch</span></h2>
     </div>
     <div class="contact-grid reveal">
       <a class="contact-card" href="mailto:dikshantpareek18900@gmail.com">
@@ -794,9 +811,9 @@
       </div>
     </div>
   </div>
-</section>
 
-<footer>
+
+
   <div class="wrap">© <span id="year"></span> Deekshant Pareek. Built with care.</div>
 </footer>
 
@@ -905,6 +922,32 @@
     }
     requestAnimationFrame(runPackets);
   }
+  const contactWords = [
+    "Reach Out",
+    "Let's Build Together",
+    "Get in Touch",
+    "Happy to Talk",
+    "Let's Connect",
+    "Open for Opportunities",
+    "Available for Collaboration",
+    "Have an Idea?",
+    "Say Hello"
+];
+
+const contactText = document.getElementById("contactText");
+
+let contactIndex = 0;
+
+setInterval(() => {
+    contactText.classList.add("fade");
+
+    setTimeout(() => {
+        contactIndex = (contactIndex + 1) % contactWords.length;
+        contactText.textContent = contactWords[contactIndex];
+        contactText.classList.remove("fade");
+    }, 400);
+
+}, 2000);
 </script>
 
 </body>
