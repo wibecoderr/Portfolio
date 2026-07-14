@@ -94,6 +94,37 @@
   }
   .navlinks a:hover, .navlinks a:focus-visible{color:var(--accent);}
 
+  .nav-resume{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    color:var(--ink);
+    background:var(--surface);
+    text-decoration:none;
+    flex-shrink:0;
+    transition:border-color .15s ease, color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .nav-resume svg{transition:transform .18s ease;}
+  .nav-resume:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    background:var(--accent-soft);
+    transform:translateY(-1px);
+    box-shadow:0 6px 14px rgba(35,93,92,0.14);
+  }
+  .nav-resume:hover svg{transform:translateY(2px);}
+  .nav-resume:active{transform:translateY(0);}
+  @media (max-width:640px){
+    .nav-resume .resume-label{display:none;}
+    .nav-resume{padding:9px 11px;}
+  }
+
   .hero{
     padding:96px 0 72px;
     position:relative;
@@ -272,6 +303,12 @@
     border-radius:var(--radius);
     padding:28px;
     margin-bottom:20px;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(20,24,31,0.08);
+    border-color:var(--accent);
   }
   .project-top{
     display:flex;
@@ -303,6 +340,114 @@
     background:var(--accent-soft);
     padding:4px 9px;
     border-radius:5px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .project-stack span:hover{transform:translateY(-1px);}
+
+  /* PAGINATION — minimal linear strip (LeetCode/Codeforces style) */
+  .pagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    margin-top:32px;
+  }
+  .page-numbers{
+    display:flex;
+    align-items:center;
+    gap:2px;
+  }
+  .page-btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13.5px;
+    min-width:30px;
+    height:30px;
+    padding:0 4px;
+    border:none;
+    background:transparent;
+    color:var(--ink-faint);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    transition:color .15s ease;
+  }
+  .page-btn::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-1px;
+    width:0;
+    height:2px;
+    background:var(--accent);
+    transform:translateX(-50%);
+    transition:width .18s ease;
+  }
+  .page-btn:hover:not(:disabled):not(.active){color:var(--ink);}
+  .page-btn.active{
+    color:var(--accent);
+    font-weight:600;
+  }
+  .page-btn.active::after{width:16px;}
+  .page-btn:disabled{
+    opacity:.3;
+    cursor:not-allowed;
+  }
+  .page-dots{
+    min-width:20px;
+    color:var(--ink-faint);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+  }
+
+  .page-nav{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    height:36px;
+    padding:0 16px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--ink);
+    border-radius:999px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    transition:border-color .18s ease, color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .page-nav .arrow{
+    display:inline-block;
+    transition:transform .18s ease;
+    font-size:14px;
+    line-height:1;
+  }
+  .page-nav:hover:not(:disabled){
+    border-color:var(--accent);
+    color:var(--accent);
+    background:var(--accent-soft);
+    transform:translateY(-1px);
+    box-shadow:0 6px 14px rgba(35,93,92,0.14);
+  }
+  .page-nav.nav-prev:hover:not(:disabled) .arrow{transform:translateX(-3px);}
+  .page-nav.nav-next:hover:not(:disabled) .arrow{transform:translateX(3px);}
+  .page-nav:active:not(:disabled){transform:translateY(0);}
+  .page-nav:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    background:var(--surface);
+    color:var(--ink-faint);
+    border-color:var(--line);
+    box-shadow:none;
+    transform:none;
+  }
+  @media (max-width:480px){
+    .page-nav span.nav-label{display:none;}
+    .page-nav{padding:0 12px;}
   }
 
   .ach-list{list-style:none; margin:0; padding:0; display:grid; gap:14px;}
@@ -490,18 +635,9 @@
     .rotate-word{transition:none;}
   }
 
-  /* PROJECT CARD HOVER LIFT */
-  .project-card{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
-  .project-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 24px rgba(20,24,31,0.08);
-    border-color:var(--accent);
-  }
-
   /* TAG HOVER */
-  .tag, .project-stack span{transition:transform .15s ease, background .15s ease;}
+  .tag{transition:transform .15s ease, background .15s ease;}
   .tag:hover{background:var(--accent-soft); border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
-  .project-stack span:hover{transform:translateY(-1px);}
 
   /* AMBIENT BACKGROUND */
   .hero{overflow:hidden;}
@@ -563,6 +699,11 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+
+    <a class="nav-resume" href="resume.pdf" download="Deekshant_Pareek_Resume_SDE.pdf">
+      <span class="resume-label">Resume</span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    </a>
   </div>
 </nav>
 
@@ -667,38 +808,12 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Projects</h2>
+      <span class="section-tag" id="projectPageTag"></span>
     </div>
 
-    <div class="project-card reveal">
-      <div class="project-top">
-        <div class="project-title">AI-Powered HRMS</div>
-        <a class="project-link" href="https://github.com/wibecoderr/Human-Resource-Management-System---HRMS-ai" target="_blank" rel="noopener">github ↗</a>
-      </div>
-      <ul class="project-desc">
-        <li>Developed a full-stack HRMS with JWT authentication, 4-role RBAC, and dashboards for employee management, attendance, leave approvals, and payroll processing.</li>
-        <li>Built an AI recruitment pipeline using Gemini AI to parse resumes, evaluate candidates against job descriptions, and automate shortlisting through structured scoring.</li>
-        <li>Implemented AI interview assessments with role-specific question generation, multi-dimensional answer evaluation, and fallback mechanisms for workflow reliability.</li>
-      </ul>
-      <div class="project-stack">
-        <span>Go</span><span>PostgreSQL</span><span>Gemini AI</span><span>JWT</span><span>REST API</span><span>HTML/CSS/JS</span>
-      </div>
-    </div>
+    <div id="projectsContainer"></div>
 
-    <div class="project-card reveal">
-      <div class="project-top">
-        <div class="project-title">StoreX — Asset Management System</div>
-        <a class="project-link" href="https://github.com/wibecoderr/storex" target="_blank" rel="noopener"> github</a>
-      </div>
-      <ul class="project-desc">
-        <li>Engineered a REST API for asset-lifecycle management across 5 asset types, with PostgreSQL schemas, audit logging, automated migrations, JWT authentication, and 5-role RBAC.</li>
-        <li>Added database-backed session management with instant token invalidation on logout.</li>
-        <li>Scaled to handle 10K+ asset records; paginated, filterable APIs reduced dashboard load time by 40% while maintaining 100% audit traceability across all RBAC roles.</li>
-        <li>Enforced business-rule-driven soft deletes, real-time dashboard analytics, and fault-tolerant fallback logic to ensure zero data loss on concurrent write operations.</li>
-      </ul>
-      <div class="project-stack">
-        <span>Go</span><span>PostgreSQL</span><span>JWT</span><span>REST API</span><span>Firebase</span>
-      </div>
-    </div>
+    <div class="pagination" id="projectPagination"></div>
   </div>
 </section>
 
@@ -799,11 +914,15 @@
       </a>
       <a class="contact-card" href="https://github.com/wibecoderr" target="_blank" rel="noopener">
         <div class="contact-label">GitHub</div>
-        <div class="contact-value"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle; margin-right:6px;"><path d="M12 .5C5.65.5.5 5.65 5.65 5.65 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.56v-2.02c-3.2.7-3.88-1.38-3.88-1.38-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.56-.29-5.25-1.28-5.25-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.44-2.69 5.42-5.26 5.7.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>Github/wibecoderr</div>
+        <div class="contact-value"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle; margin-right:6px;"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.56v-2.02c-3.2.7-3.88-1.38-3.88-1.38-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.56-.29-5.25-1.28-5.25-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.44-2.69 5.42-5.26 5.7.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>Github/wibecoderr</div>
       </a>
       <a class="contact-card" href="https://www.linkedin.com/in/deekshant-pareek-702667230/" target="_blank" rel="noopener">
         <div class="contact-label">LinkedIn</div>
         <div class="contact-value">LinkedIn/deekshant</div>
+      </a>
+      <a class="contact-card" href="resume.pdf" download="Deekshant_Pareek_Resume_SDE.pdf">
+        <div class="contact-label">Resume</div>
+        <div class="contact-value"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle; margin-right:6px;"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download PDF</div>
       </a>
       <div class="contact-card" style="cursor:default;">
         <div class="contact-label">Location</div>
@@ -948,6 +1067,205 @@ setInterval(() => {
     }, 400);
 
 }, 2000);
+
+/* ============================================================
+   PROJECTS — paginated (page-number style, 2 per page)
+   Just add/edit objects in the `projects` array below.
+   Each project needs: title, link, linkLabel, desc[], stack[]
+   ============================================================ */
+(function(){
+  var projects = [
+    {
+      title: "AI-Powered HRMS",
+      link: "https://github.com/wibecoderr/Human-Resource-Management-System---HRMS-ai",
+      linkLabel: "github ↗",
+      desc: [
+        "Developed a full-stack HRMS with JWT authentication, 4-role RBAC, and dashboards for employee management, attendance, leave approvals, and payroll processing.",
+        "Built an AI recruitment pipeline using Gemini AI to parse resumes, evaluate candidates against job descriptions, and automate shortlisting through structured scoring.",
+        "Implemented AI interview assessments with role-specific question generation, multi-dimensional answer evaluation, and fallback mechanisms for workflow reliability."
+      ],
+      stack: ["Go", "PostgreSQL", "Gemini AI", "JWT", "REST API", "HTML/CSS/JS"]
+    },
+    {
+      title: "StoreX — Asset Management System",
+      link: "https://github.com/wibecoderr/storex",
+      linkLabel: "github ↗",
+      desc: [
+        "Engineered a REST API for asset-lifecycle management across 5 asset types, with PostgreSQL schemas, audit logging, automated migrations, JWT authentication, and 5-role RBAC.",
+        "Added database-backed session management with instant token invalidation on logout.",
+        "Scaled to handle 10K+ asset records; paginated, filterable APIs reduced dashboard load time by 40% while maintaining 100% audit traceability across all RBAC roles.",
+        "Enforced business-rule-driven soft deletes, real-time dashboard analytics, and fault-tolerant fallback logic to ensure zero data loss on concurrent write operations."
+      ],
+      stack: ["Go", "PostgreSQL", "JWT", "REST API", "Firebase"]
+    },
+    // ---- DUMMY PROJECT #1 — edit or replace with a real one ----
+    {
+      title: "Dummy Project — Replace Me",
+      link: "#",
+      linkLabel: "github ↗",
+      desc: [
+        "Short one-line summary of what this project does goes here.",
+        "Second bullet — a key technical detail or challenge you solved.",
+        "Third bullet — an impact/metric, e.g. reduced X by Y%."
+      ],
+      stack: ["Tech1", "Tech2", "Tech3"]
+    },
+    // ---- DUMMY PROJECT #2 — edit or replace with a real one ----
+    {
+      title: "Dummy Project — Replace Me Too",
+      link: "#",
+      linkLabel: "github ↗",
+      desc: [
+        "Short one-line summary of what this project does goes here.",
+        "Second bullet — a key technical detail or challenge you solved.",
+        "Third bullet — an impact/metric, e.g. reduced X by Y%."
+      ],
+      stack: ["Tech1", "Tech2", "Tech3"]
+    }
+  ];
+
+  var PER_PAGE = 2;
+  var totalPages = Math.max(1, Math.ceil(projects.length / PER_PAGE));
+  var currentPage = 1;
+
+  var container = document.getElementById('projectsContainer');
+  var pagination = document.getElementById('projectPagination');
+  var pageTag = document.getElementById('projectPageTag');
+
+  function renderCard(p){
+    var card = document.createElement('div');
+    card.className = 'project-card reveal in-view';
+
+    var top = document.createElement('div');
+    top.className = 'project-top';
+
+    var title = document.createElement('div');
+    title.className = 'project-title';
+    title.textContent = p.title;
+    top.appendChild(title);
+
+    if (p.link) {
+      var link = document.createElement('a');
+      link.className = 'project-link';
+      link.href = p.link;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = p.linkLabel || 'github ↗';
+      top.appendChild(link);
+    }
+    card.appendChild(top);
+
+    var descList = document.createElement('ul');
+    descList.className = 'project-desc';
+    p.desc.forEach(function(d){
+      var li = document.createElement('li');
+      li.textContent = d;
+      descList.appendChild(li);
+    });
+    card.appendChild(descList);
+
+    var stackRow = document.createElement('div');
+    stackRow.className = 'project-stack';
+    p.stack.forEach(function(s){
+      var span = document.createElement('span');
+      span.textContent = s;
+      stackRow.appendChild(span);
+    });
+    card.appendChild(stackRow);
+
+    return card;
+  }
+
+  function renderPage(page){
+    currentPage = Math.min(Math.max(1, page), totalPages);
+    container.innerHTML = '';
+    var start = (currentPage - 1) * PER_PAGE;
+    var pageItems = projects.slice(start, start + PER_PAGE);
+    pageItems.forEach(function(p){
+      container.appendChild(renderCard(p));
+    });
+    if (pageTag) pageTag.textContent = 'page ' + currentPage + ' / ' + totalPages;
+    renderPagination();
+    if (!reduceMotion) {
+      window.scrollTo({ top: container.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+    }
+  }
+
+  function makeBtn(label, disabled, active, onClick){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'page-btn' + (active ? ' active' : '');
+    btn.textContent = label;
+    btn.disabled = !!disabled;
+    if (onClick) btn.addEventListener('click', onClick);
+    return btn;
+  }
+
+  function makeNavBtn(direction, disabled, onClick){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'page-nav nav-' + direction;
+    btn.disabled = !!disabled;
+
+    var arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.textContent = direction === 'prev' ? '←' : '→';
+
+    var label = document.createElement('span');
+    label.className = 'nav-label';
+    label.textContent = direction === 'prev' ? 'Prev' : 'Next';
+
+    if (direction === 'prev') { btn.appendChild(arrow); btn.appendChild(label); }
+    else { btn.appendChild(label); btn.appendChild(arrow); }
+
+    if (onClick) btn.addEventListener('click', onClick);
+    return btn;
+  }
+
+  function makeDots(){
+    var span = document.createElement('span');
+    span.className = 'page-dots';
+    span.textContent = '···';
+    return span;
+  }
+
+  function renderPagination(){
+    pagination.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    pagination.appendChild(makeNavBtn('prev', currentPage === 1, function(){ renderPage(currentPage - 1); }));
+
+    var numbers = document.createElement('div');
+    numbers.className = 'page-numbers';
+
+    // build page number list with ellipsis for many pages (codeforces-style)
+    var pages = [];
+    if (totalPages <= 7) {
+      for (var i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      var left = Math.max(2, currentPage - 1);
+      var right = Math.min(totalPages - 1, currentPage + 1);
+      if (left > 2) pages.push('…');
+      for (var j = left; j <= right; j++) pages.push(j);
+      if (right < totalPages - 1) pages.push('…');
+      pages.push(totalPages);
+    }
+
+    pages.forEach(function(p){
+      if (p === '…') {
+        numbers.appendChild(makeDots());
+      } else {
+        numbers.appendChild(makeBtn(String(p), false, p === currentPage, function(){ renderPage(p); }));
+      }
+    });
+
+    pagination.appendChild(numbers);
+    pagination.appendChild(makeNavBtn('next', currentPage === totalPages, function(){ renderPage(currentPage + 1); }));
+  }
+
+  renderPage(1);
+})();
 </script>
 
 </body>
