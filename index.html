@@ -918,7 +918,7 @@
       </a>
       <a class="contact-card" href="https://www.linkedin.com/in/deekshant-pareek-702667230/" target="_blank" rel="noopener">
         <div class="contact-label">LinkedIn</div>
-        <div class="contact-value">LinkedIn/deekshant</div>
+        <div class="contact-value"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle; margin-right:6px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.15 1.45-2.15 2.94v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn/deekshant</div>
       </a>
       <a class="contact-card" href="resume.pdf" download="Deekshant_Pareek_Resume_SDE.pdf">
         <div class="contact-label">Resume</div>
@@ -1100,28 +1100,27 @@ setInterval(() => {
     },
     // ---- DUMMY PROJECT #1 — edit or replace with a real one ----
     {
-      title: "Dummy Project — Replace Me",
-      link: "#",
+      title: "Reminder",
+      link: "https://github.com/wibecoderr/Reminder",
       linkLabel: "github ↗",
       desc: [
-        "Short one-line summary of what this project does goes here.",
-        "Second bullet — a key technical detail or challenge you solved.",
-        "Third bullet — an impact/metric, e.g. reduced X by Y%."
+       "A simple terminal-based reminder script written in Shell.",
+"This tool lets you add a date, time, and message from the terminal, and it will notify you with the message (and sound if supported) at the scheduled moment"
       ],
-      stack: ["Tech1", "Tech2", "Tech3"]
+      stack: ["Shell", "Linux"]
     },
     // ---- DUMMY PROJECT #2 — edit or replace with a real one ----
     {
-      title: "Dummy Project — Replace Me Too",
-      link: "#",
+      title: "To-DO ",
+      link: "https://github.com/wibecoderr/ToDo",
       linkLabel: "github ↗",
-      desc: [
-        "Short one-line summary of what this project does goes here.",
-        "Second bullet — a key technical detail or challenge you solved.",
-        "Third bullet — an impact/metric, e.g. reduced X by Y%."
-      ],
-      stack: ["Tech1", "Tech2", "Tech3"]
-    }
+     desc: [
+    "Built a REST API backend for a ToDo application in Go with a clean, modular folder structure separating handlers, models, and database logic.",
+    "Designed CRUD endpoints (GET/POST/PUT/DELETE) for todo items backed by PostgreSQL, with custom middleware for request handling.",
+    "Containerized the app with Docker Compose, spinning up the Go service and PostgreSQL together with a single command for fast local setup."
+  ],
+  stack: ["Go", "PostgreSQL", "Docker", "REST API", "Docker Compose"]
+}
   ];
 
   var PER_PAGE = 2;
@@ -1176,7 +1175,7 @@ setInterval(() => {
     return card;
   }
 
-  function renderPage(page, isUserAction){
+  function renderPage(page){
     currentPage = Math.min(Math.max(1, page), totalPages);
     container.innerHTML = '';
     var start = (currentPage - 1) * PER_PAGE;
@@ -1186,9 +1185,6 @@ setInterval(() => {
     });
     if (pageTag) pageTag.textContent = 'page ' + currentPage + ' / ' + totalPages;
     renderPagination();
-    if (isUserAction && !reduceMotion) {
-      window.scrollTo({ top: container.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
-    }
   }
 
   function makeBtn(label, disabled, active, onClick){
@@ -1233,7 +1229,7 @@ setInterval(() => {
     pagination.innerHTML = '';
     if (totalPages <= 1) return;
 
-    pagination.appendChild(makeNavBtn('prev', currentPage === 1, function(){ renderPage(currentPage - 1, true); }));
+    pagination.appendChild(makeNavBtn('prev', currentPage === 1, function(){ renderPage(currentPage - 1); }));
 
     var numbers = document.createElement('div');
     numbers.className = 'page-numbers';
@@ -1256,12 +1252,12 @@ setInterval(() => {
       if (p === '…') {
         numbers.appendChild(makeDots());
       } else {
-        numbers.appendChild(makeBtn(String(p), false, p === currentPage, function(){ renderPage(p, true); }));
+        numbers.appendChild(makeBtn(String(p), false, p === currentPage, function(){ renderPage(p); }));
       }
     });
 
     pagination.appendChild(numbers);
-    pagination.appendChild(makeNavBtn('next', currentPage === totalPages, function(){ renderPage(currentPage + 1, true); }));
+    pagination.appendChild(makeNavBtn('next', currentPage === totalPages, function(){ renderPage(currentPage + 1); }));
   }
 
   renderPage(1);
