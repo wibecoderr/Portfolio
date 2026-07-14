@@ -1176,7 +1176,7 @@ setInterval(() => {
     return card;
   }
 
-  function renderPage(page){
+  function renderPage(page, isUserAction){
     currentPage = Math.min(Math.max(1, page), totalPages);
     container.innerHTML = '';
     var start = (currentPage - 1) * PER_PAGE;
@@ -1186,7 +1186,7 @@ setInterval(() => {
     });
     if (pageTag) pageTag.textContent = 'page ' + currentPage + ' / ' + totalPages;
     renderPagination();
-    if (!reduceMotion) {
+    if (isUserAction && !reduceMotion) {
       window.scrollTo({ top: container.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
     }
   }
@@ -1233,7 +1233,7 @@ setInterval(() => {
     pagination.innerHTML = '';
     if (totalPages <= 1) return;
 
-    pagination.appendChild(makeNavBtn('prev', currentPage === 1, function(){ renderPage(currentPage - 1); }));
+    pagination.appendChild(makeNavBtn('prev', currentPage === 1, function(){ renderPage(currentPage - 1, true); }));
 
     var numbers = document.createElement('div');
     numbers.className = 'page-numbers';
@@ -1256,12 +1256,12 @@ setInterval(() => {
       if (p === '…') {
         numbers.appendChild(makeDots());
       } else {
-        numbers.appendChild(makeBtn(String(p), false, p === currentPage, function(){ renderPage(p); }));
+        numbers.appendChild(makeBtn(String(p), false, p === currentPage, function(){ renderPage(p, true); }));
       }
     });
 
     pagination.appendChild(numbers);
-    pagination.appendChild(makeNavBtn('next', currentPage === totalPages, function(){ renderPage(currentPage + 1); }));
+    pagination.appendChild(makeNavBtn('next', currentPage === totalPages, function(){ renderPage(currentPage + 1, true); }));
   }
 
   renderPage(1);
